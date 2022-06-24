@@ -1,17 +1,18 @@
-// @ts-nocheck
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Router } from '@reach/router';
 import Home from './pages/home';
-import Character from './pages/character';
+import Episode from './pages/episode';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-      <Router>
-        <Home path="/" />
-        <Character path="/:slug" />
-      </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<Episode />} path="/episode/:slug" />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

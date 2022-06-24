@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import BackgroundImage from '../assets/rick-morty.png'
 import { useNavigate } from "@reach/router"
+import ImageContainer from "./Image"
+import { Link } from 'react-router-dom'
 
 const CardContainer = styled.div`
     height: 300px;
@@ -10,12 +12,6 @@ const CardContainer = styled.div`
     display: flex; 
     flex-direction: column;
     justify-content: space-between;
-
-    .img-container {
-        height: 120px;
-        background-size: cover;
-        background-image: url(${BackgroundImage});
-    }
 
     .details-list {
         margin: 0;
@@ -47,13 +43,9 @@ interface CardProps {
 }
 
 const Card = ({ name, specie, status, slug }: CardProps) => {
-    const navigate = useNavigate()
-
     return (
         <CardContainer>
-            <div className="img-container" >
-                <img alt={name} src="https://broke" />
-            </div>
+            <ImageContainer name={name} url="https://" />
 
             <ul className="details-list" >
                 <li>
@@ -67,9 +59,12 @@ const Card = ({ name, specie, status, slug }: CardProps) => {
                 </li>
             </ul>
 
-            <Button onClick={() => navigate(`/${slug}`)} width="100%" color="grey" >
-                Details
-            </Button>
+            <Link to={`/episode/${slug}`} >
+                <Button width="100%" color="grey" >
+                    Details
+                </Button>
+            </Link>
+
         </CardContainer>
     )
 }

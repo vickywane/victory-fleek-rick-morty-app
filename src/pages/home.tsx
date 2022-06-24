@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Sidebar from '../components/sidebar'
 import Card from '../components/card'
 import Paginator from '../components/Paginator'
+import { ReactNode } from 'react'
 
 const GridContainer = styled.div`
     margin: 16px;
@@ -31,6 +32,7 @@ const GridContainer = styled.div`
 // const fakeItems = [{}, {}]
 const fakeItems = [{}, {}, {}, {}, {}, {}]
 
+
 const Home = () => (
     <div>
         <Header />
@@ -51,8 +53,8 @@ const Home = () => (
                         ))
                     }
                 </div>
-                 
-                <Paginator  itemSize={fakeItems.length} />
+
+                <Paginator itemSize={fakeItems.length} />
             </div>
         </GridContainer>
     </div>
