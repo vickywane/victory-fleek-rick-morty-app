@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import styled from "styled-components"
 import { FiSearch } from 'react-icons/fi'
+import { useDispatch } from 'react-redux'
+import { getCharacters } from '../state/store/character/action'
 
 const SidebarContainer = styled.div`
     border-right: 1.5px solid #000;
     padding: 10px;
 `
 
-const TextInputContainer = styled.div`
+const TextInputContainer = styled.form`
     height: 40px;
     width: 300px;
     border: 1px solid #000;
@@ -39,23 +41,48 @@ const SelectContainer = styled.select`
 `
 
 const Sidebar = () => {
-    const [searchText, setSearchText] = useState<string>('')
-    const [statusFilter, setStatusFilter] = useState<string>('Status')
-    const [genderFilter, setGenderFilter] = useState<string>('Gender Filter')
+    const [characterName, setCharacterName] = useState<string>('')
+    const [status, setStatus] = useState<string>('unknown')
+    const [gender, setGenderFilter] = useState<string>('unknown')
+    const dispatch = useDispatch()
+
+    const fetchFilteredResult = (name: string) => {
+        // @ts-ignore
+        dispatch(getCharacters({ status, gender, name }))
+    }
+
+    const filterByName = useCallback((name: string) => {
+
+    }, [])
+
+    useEffect(() => {
+        fetchFilteredResult(characterName)
+    }, [gender, status])
+
+    // watches changes in select fields
+    useEffect(() =>
+        filterByName(characterName), [characterName, filterByName]
+    );
 
     return (
         <SidebarContainer>
-            <TextInputContainer>
+            <TextInputContainer onSubmit={e => {
+                e.preventDefault()
+                filterByName(characterName)
+            }} >
                 <span>
                     <FiSearch />
                 </span>
-                <input onChange={(e) => setSearchText(e.target.value)} placeholder="Filter By Name" />
+                <input
+                    value={characterName}
+                    onChange={(e) => setCharacterName(e.target.value)}
+                    placeholder="Filter By Name" />
             </TextInputContainer>
 
             <br />
 
-            <SelectContainer defaultValue={statusFilter} onChange={e => setStatusFilter(e.target.value)} >
-                <option value="Status" disabled hidden>
+            <SelectContainer defaultValue={status} onChange={e => setStatus(e.target.value)} >
+                <option value="unknown" disabled hidden>
                     Status
                 </option>
 
@@ -75,8 +102,8 @@ const Sidebar = () => {
             <br />
             <br />
 
-            <SelectContainer defaultValue={genderFilter} onChange={e => setGenderFilter(e.target.value)} >
-                <option value="Gender Filter" disabled hidden>
+            <SelectContainer defaultValue={gender} onChange={e => setGenderFilter(e.target.value)} >
+                <option value="unknown" disabled hidden>
                     Gender Filter
                 </option>
 

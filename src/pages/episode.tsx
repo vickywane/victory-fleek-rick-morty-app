@@ -1,4 +1,4 @@
-import { useParams } from "@reach/router"
+import { useLocation, useParams } from "@reach/router"
 import styled from "styled-components"
 import Header from "../components/header"
 import { FiChevronLeft } from 'react-icons/fi'
@@ -7,6 +7,8 @@ import EpisodeDetails from "../components/EpisodeDetails"
 import CharacterDetails from "../components/CharacterDetails"
 import { Link } from 'react-router-dom'
 import Tabs from "../components/Tabs"
+import { useEffect, useState } from "react"
+import { Character } from "./home"
 
 const GridContainer = styled.div`
     display: grid;
@@ -39,6 +41,23 @@ const GridContainer = styled.div`
 `
 
 export default function Episode() {
+    const route = useLocation()
+    const navigate = useNavigate()
+
+    const [currentCharacter, setCurrentCharacter] = useState<Record<string, string>>({})
+
+    useEffect(() => {
+        // @ts-ignore
+        const { character }: { character: Character } = route.state
+        if (!character) {
+            navigate("/")
+            return
+        }
+
+        // @ts-ignore
+        setCurrentCharacter(character)
+    }, [])
+
     return (
         <div>
             <Header />

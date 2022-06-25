@@ -1,7 +1,9 @@
 import styled from "styled-components"
 import { FiChevronsRight, FiChevronsLeft } from 'react-icons/fi'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UlList } from "../styles"
+import { useDispatch } from "react-redux"
+import { getCharacters } from "../state/store/character/action"
 
 const Paginate = styled.div`
     height: 50px;
@@ -10,8 +12,6 @@ const Paginate = styled.div`
     width: 100%;
     border: 1px solid #7D7D80;
     border-radius: 8px;
-
-    
 `
 
 const PaginationItem = styled.li`
@@ -43,6 +43,12 @@ interface PaginatorProps {
 
 const Paginator = ({ itemSize }: PaginatorProps) => {
     const [currentPage, setPage] = useState<number>(1)
+    const dispatch = useDispatch() 
+
+    useEffect(() => {
+        // @ts-ignore
+        dispatch(getCharacters({currentPage}))
+    }, [currentPage])
 
     return (
         <Paginate>
@@ -53,10 +59,20 @@ const Paginator = ({ itemSize }: PaginatorProps) => {
                 <FiChevronsLeft />
             </PaginationItem>
 
-            <UlList flexDirection="row">
+            <UlList
+                flexDirection="row"
+                style={{
+                    // width: "400px",
+                }}
+            >
                 {
                     Array(itemSize).fill(0).map((_, index) => (
                         <PaginationItem
+                            style={{
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                                textOverflow: "ellipsis",
+                            }}
                             active={(index + 1) === currentPage}
                             onClick={() => setPage(index + 1)}
                             className="pagination-item"

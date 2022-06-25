@@ -7,7 +7,6 @@ import breakpoint, { map } from 'styled-components-breakpoint';
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../state/store'
 import { useEffect } from 'react'
-import { fetchCharacters } from '../state/slices/character.slice'
 import { getCharacters } from '../state/store/character/action'
 import { Text } from '../styles/index'
 
@@ -50,8 +49,6 @@ const GridContainer = styled.div`
         }
     `}
 `
-
-const fakeItems = [{}, {}, {}, {}, {}, {}]
 
 export interface Character {
     created: string
