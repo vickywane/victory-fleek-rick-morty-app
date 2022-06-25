@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import styled from "styled-components"
 import { FiSearch } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
-import { getCharacters } from '../state/store/character/action'
+import { getCharacters } from '../state/actions/character.action'
 
 const SidebarContainer = styled.div`
     border-right: 1.5px solid #000;

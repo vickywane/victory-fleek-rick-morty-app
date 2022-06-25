@@ -1,14 +1,12 @@
-import { useLocation, useParams } from "@reach/router"
 import styled from "styled-components"
 import Header from "../components/header"
 import { FiChevronLeft } from 'react-icons/fi'
-import { useNavigate } from '@reach/router'
 import EpisodeDetails from "../components/EpisodeDetails"
 import CharacterDetails from "../components/CharacterDetails"
 import { Link } from 'react-router-dom'
 import Tabs from "../components/Tabs"
-import { useEffect, useState } from "react"
-import { Character } from "./home"
+import { useSelector } from 'react-redux'
+import { RootState } from '../state'
 
 const GridContainer = styled.div`
     display: grid;
@@ -40,23 +38,10 @@ const GridContainer = styled.div`
     }
 `
 
+// EDGE CASE: HANDLE SCENARIOS WHERE A USER NAVIGATES TO A NEW PAGE AND REFRESHES WHICH CLEARS OUT THE DATA
+
 export default function Episode() {
-    const route = useLocation()
-    const navigate = useNavigate()
-
-    const [currentCharacter, setCurrentCharacter] = useState<Record<string, string>>({})
-
-    useEffect(() => {
-        // @ts-ignore
-        const { character }: { character: Character } = route.state
-        if (!character) {
-            navigate("/")
-            return
-        }
-
-        // @ts-ignore
-        setCurrentCharacter(character)
-    }, [])
+    const  { character } = useSelector((state : RootState) => state.characters)
 
     return (
         <div>
@@ -72,7 +57,7 @@ export default function Episode() {
 
                 <div>
                     <section>
-                        <CharacterDetails />
+                        <CharacterDetails character={character} />
                     </section>
                     <br />
                     <br />
@@ -80,11 +65,11 @@ export default function Episode() {
                     <section>
                         <h3> Episodes Info </h3>
 
-                        <Tabs />
+                        <Tabs episodes={character.episode} />
                     </section>
 
                     <section>
-                        <EpisodeDetails />
+                        <EpisodeDetails characterName={character.name} />
                     </section>
                 </div>
             </GridContainer>

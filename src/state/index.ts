@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import characterSlice from "../slices/character.slice";
+import characterSlice from "./slices/character.slice";
+import episodeSlice from "./slices/episode.slice";
 
 const reducer = combineReducers({
-    characters: characterSlice.reducer
+    characters: characterSlice.reducer,
+    episodes: episodeSlice.reducer
 })
 
 const store = configureStore({

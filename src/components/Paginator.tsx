@@ -3,7 +3,7 @@ import { FiChevronsRight, FiChevronsLeft } from 'react-icons/fi'
 import { useEffect, useState } from "react"
 import { UlList } from "../styles"
 import { useDispatch } from "react-redux"
-import { getCharacters } from "../state/store/character/action"
+import { getCharacters } from "../state/actions/character.action"
 
 const Paginate = styled.div`
     height: 50px;

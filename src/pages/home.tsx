@@ -5,10 +5,11 @@ import Card from '../components/card'
 import Paginator from '../components/Paginator'
 import breakpoint, { map } from 'styled-components-breakpoint';
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../state/store'
+import { RootState } from '../state'
 import { useEffect } from 'react'
-import { getCharacters } from '../state/store/character/action'
+import { getCharacters } from '../state/actions/character.action'
 import { Text } from '../styles/index'
+import { Character } from '../types'
 
 const GridContainer = styled.div`
     margin: 16px;
@@ -49,27 +50,6 @@ const GridContainer = styled.div`
         }
     `}
 `
-
-export interface Character {
-    created: string
-    episode: Array<string>
-    gender: string
-    id: number
-    image: string
-    location: {
-        name: string,
-        url: string
-    }
-    name: string
-    origin: {
-        name: string,
-        url: string
-    }
-    species: string
-    status: string
-    type: string
-    url: string
-}
 
 const Home = () => {
     const { resultsInfo, characters, loading : loadingCharacters } = useSelector((state: RootState) => state.characters)

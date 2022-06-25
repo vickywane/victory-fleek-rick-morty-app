@@ -1,7 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
-
-const mockTabs = [{}, {}, {}]
+import { RootState } from "../state"
+import { getEpisodeDetails } from "../state/actions/episode.action"
+import { setCurrentEpisode } from '../state/slices/episode.slice'
 
 const Tabs = styled.ul`
     display: flex;
@@ -9,7 +11,6 @@ const Tabs = styled.ul`
     margin: 0;
     padding: 0;
     border-bottom: 2px solid #000;
-
 `
 
 const Tab = styled.li`
@@ -32,22 +33,36 @@ const Tab = styled.li`
 `
 
 interface EpisodeTabsProps {
-
+    episodes: Array<string>
 }
 
-const EpisodeTabs = () => {
-    const [activeTab, setActiveTab] = useState<string>("Episode 1")
+const EpisodeTabs = ({ episodes }: EpisodeTabsProps) => {
+    const dispatch = useDispatch()
+    const { currentEpisodeTab } = useSelector((state: RootState) => state.episodes)
+
+ 
+    const handleTabChange = (index: number) => {
+        dispatch(setCurrentEpisode(index))
+
+        // @ts-ignore
+        dispatch(getEpisodeDetails({ episodeId: currentEpisodeTab }))
+    }
 
     return (
         <Tabs>
-            {mockTabs.map((_, index: number) => (
+            {episodes?.slice(0, 5).map((item, index: number) => {
+                
+                // console.log(item, index + 1);
+                
+
+                return (
                 <Tab
-                    onClick={() => setActiveTab(`Episode ${index + 1}`)}
-                    active={activeTab === `Episode ${index + 1}`}
+                    onClick={() => handleTabChange(index + 1) }
+                    active={currentEpisodeTab === index + 1}
                 >
                     Episode {index + 1}
                 </Tab>
-            ))}
+            )})}
         </Tabs>
     )
 }

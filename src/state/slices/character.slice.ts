@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {
 	getCharacters,
-} from '../store/character/action';
+} from '../actions/character.action';
+import { Character } from '../../types';
 
 interface CharacterState {
-	characters: Array<any>,
+	characters: Array<Character>,
+	character: Character,
 	loadError: boolean,
 	loading: boolean,
 	resultsInfo: Record<string, number>
@@ -13,6 +15,7 @@ interface CharacterState {
 
 const initialState: CharacterState = {
 	characters: [],
+	character: {} as Character,
 	loadError: false,
 	loading: true,
 	resultsInfo: {}
@@ -24,6 +27,9 @@ const characterSlice = createSlice({
 	reducers: {
 		fetchCharacters(state) {
 			// console.log("SLICE STATE:", state);
+		},
+		setCharacter(state, action: PayloadAction<Character>) {
+			state.character = action.payload
 		}
 	},
 	extraReducers: (builder) =>  {
@@ -36,5 +42,5 @@ const characterSlice = createSlice({
 	}
 });
 
-export const { fetchCharacters } = characterSlice.actions
+export const { fetchCharacters, setCharacter } = characterSlice.actions
 export default characterSlice;
