@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {
+	getSingleCharacter,
 	getCharacters,
 } from '../actions/character.action';
 import { Character } from '../../types';
@@ -25,22 +26,23 @@ const characterSlice = createSlice({
 	name: 'CHARACTER',
 	initialState,
 	reducers: {
-		fetchCharacters(state) {
-			// console.log("SLICE STATE:", state);
-		},
 		setCharacter(state, action: PayloadAction<Character>) {
 			state.character = action.payload
 		}
 	},
 	extraReducers: (builder) =>  {
 		builder.addCase(getCharacters.fulfilled, (state, action) => {
-			// console.log("ACTION:", action);
 			state.characters = action.payload.results
 			state.resultsInfo = action.payload.info
+			state.loading = false
+		})
+		
+		builder.addCase(getSingleCharacter.fulfilled, (state, action) => {
+			state.character = action.payload
 			state.loading = false
 		})
 	}
 });
 
-export const { fetchCharacters, setCharacter } = characterSlice.actions
+export const { setCharacter } = characterSlice.actions
 export default characterSlice;

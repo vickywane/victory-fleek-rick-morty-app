@@ -48,7 +48,7 @@ const Card = ({ character }: CardProps) => {
 
     const handleDetailSelect = () => {
         dispatch(setCharacter(character))
-        navigate(`/episode/${character.name}`)
+        navigate(`/episode/${character.id}`)
     }
 
     return (

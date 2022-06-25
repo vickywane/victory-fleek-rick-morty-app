@@ -32,3 +32,22 @@ export const getCharacters = createAsyncThunk(
 		}
 	}
 );
+
+export const getSingleCharacter = createAsyncThunk(
+	'characters/getSingleCharacter',
+	async (id: number) => {
+		try {
+			const req = await fetch(`${BASE_URI}/character/${id}`)
+
+			if (req) {
+				const data = await req.json()
+				console.log("DATA", data);
+
+				return data
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+);
+

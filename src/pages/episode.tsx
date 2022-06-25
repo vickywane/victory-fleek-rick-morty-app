@@ -3,10 +3,12 @@ import Header from "../components/header"
 import { FiChevronLeft } from 'react-icons/fi'
 import EpisodeDetails from "../components/EpisodeDetails"
 import CharacterDetails from "../components/CharacterDetails"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Tabs from "../components/Tabs"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../state'
+import { useEffect } from "react"
+import { getSingleCharacter } from "../state/actions/character.action"
 
 const GridContainer = styled.div`
     display: grid;
@@ -41,13 +43,22 @@ const GridContainer = styled.div`
 // EDGE CASE: HANDLE SCENARIOS WHERE A USER NAVIGATES TO A NEW PAGE AND REFRESHES WHICH CLEARS OUT THE DATA
 
 export default function Episode() {
-    const  { character } = useSelector((state : RootState) => state.characters)
+    const { character } = useSelector((state: RootState) => state.characters)
+    const { id } = useParams()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!character.name) {
+            // @ts-ignore
+            dispatch(getSingleCharacter(id))
+        }
+    }, [])
 
     return (
         <div>
             <Header />
 
-            <GridContainer>
+            {character.name && <GridContainer>
                 <Link to="/" className='navigation-ctn'>
                     <span>
                         <FiChevronLeft />
@@ -72,7 +83,7 @@ export default function Episode() {
                         <EpisodeDetails characterName={character.name} />
                     </section>
                 </div>
-            </GridContainer>
+            </GridContainer>}
         </div>
     )
 }
