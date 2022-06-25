@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import BackgroundImage from '../assets/rick-morty.png'
-import { useNavigate } from "@reach/router"
 import ImageContainer from "./Image"
 import { Link } from 'react-router-dom'
+import { Button, Text } from "../styles"
+import breakpoint from "styled-components-breakpoint"
+import { Character } from "../pages/home"
+
 
 const CardContainer = styled.div`
     height: 300px;
@@ -19,54 +22,48 @@ const CardContainer = styled.div`
         list-style: none;
     }
 
+    ${breakpoint('mobile')`
+        height: 270px;
+        width: 300px; 
+    `}
+
+    ${breakpoint('tablet')`
+        height: 300px;
+        width: 250px; 
+    `}
+
     a {
         text-decoration: none;
     }
 `
 
-const Button = styled.button`
-    height: 40px;
-    font-size: 16px;
-    width: ${(props: { width?: string }) => props.width};
-    color: ${(props: { color?: string }) => props.color};
-    border: 1px solid ${(props: { color?: string }) => props.color};
-    &:hover {
-        cursor: pointer;
-    }
-`
-
 interface CardProps {
-    name: string;
-    specie: string;
-    status: string;
-    slug: string
+    character: Character;
 }
 
-const Card = ({ name, specie, status, slug }: CardProps) => {
-    return (
-        <CardContainer>
-            <ImageContainer name={name} url="https://" />
+const Card = ({ character }: CardProps) => (
+    <CardContainer>
+        <ImageContainer name={character.name} url={character.image} />
 
-            <ul className="details-list" >
-                <li>
-                    <p> {name} </p>
-                </li>
-                <li>
-                    <p> {specie} </p>
-                </li>
-                <li>
-                    <p> {status} </p>
-                </li>
-            </ul>
+        <ul className="details-list" >
+            <li>
+                <Text> {character.name} </Text>
+            </li>
+            <li>
+                <Text> {character.species} </Text>
+            </li>
+            <li>
+                <Text> {character.status} </Text>
+            </li>
+        </ul>
 
-            <Link to={`/episode/${slug}`} >
-                <Button width="100%" color="grey" >
-                    Details
-                </Button>
-            </Link>
+        <Link to={`/episode/${character.name}`} >
+            <Button width="100%" color="grey" >
+                Details
+            </Button>
+        </Link>
 
-        </CardContainer>
-    )
-}
+    </CardContainer>
+)
 
 export default Card

@@ -9,9 +9,15 @@ interface ImageProps {
 }
 
 const Image = styled.div`
-    height: ${(props: { height?: string }) => props.height ? props.height : "120px" };
+    height: ${(props: { height?: string }) => props.height ? props.height : "130px" };
     background-size: cover;
     background-image: url(${BackgroundImage});
+
+    img {
+        height: ${(props: { height?: string }) => props.height ? props.height : "130px" };
+        object-fit: cover;
+        width: 100%;
+    }
 `
 
 const ImageContainer = ({ name, url, height, width }: ImageProps) => (
