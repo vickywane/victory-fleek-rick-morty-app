@@ -10,5 +10,7 @@ Within this codebase, I built the solution to the Fleek assignment on building a
 - Redux-toolkit ( for state management )
 ### Installation: 
 - Clone the GitHub repository
-- Install application dependencies using a package manager. I recommend using yarn with the `yarn install` command. 
+- Install application dependencies using a package manager. I recommend using yarn with the `yarn install` command.  
 - View the application running on your local host via your browser at `http://localhost:3000`
+
+**Note:** The Rick and Morty public API endpoint is already listed in the `.env` file for an easy setup.
