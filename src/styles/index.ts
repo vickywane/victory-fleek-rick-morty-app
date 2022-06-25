@@ -27,3 +27,26 @@ export const UlList = styled.ul`
 export const ListItem = styled.li`
     background: ${(props: { color: string }) => props.color};
 `
+
+export const TextInputContainer = styled.form`
+    height: 40px;
+    width: 300px;
+    border: 1px solid #000;
+    border-radius: 30px;
+    padding: 0 6px;
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 16px;
+        padding-right: 6px; 
+    }
+
+    input {
+        border: 0;
+        height: 30px;
+        width: 100%;
+        margin-right: 6px;
+        font-size: 16px;
+    }
+`

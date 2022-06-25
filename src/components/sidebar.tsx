@@ -1,36 +1,14 @@
-import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styled from "styled-components"
 import { FiSearch } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 import { getCharacters } from '../state/actions/character.action'
+import { debounce } from '../utils/debounce'
+import { TextInputContainer } from '../styles'
 
 const SidebarContainer = styled.div`
     border-right: 1.5px solid #000;
     padding: 10px;
-`
-
-const TextInputContainer = styled.form`
-    height: 40px;
-    width: 300px;
-    border: 1px solid #000;
-    border-radius: 30px;
-    padding: 0 6px;
-
-    display: flex;
-    align-items: center;
-
-    span {
-        font-size: 16px;
-        padding-right: 6px; 
-    }
-
-    input {
-        border: 0;
-        height: 30px;
-        width: 100%;
-        margin-right: 6px;
-        font-size: 16px;
-    }
 `
 
 const SelectContainer = styled.select`
@@ -42,27 +20,43 @@ const SelectContainer = styled.select`
 
 const Sidebar = () => {
     const [characterName, setCharacterName] = useState<string>('')
-    const [status, setStatus] = useState<string>('unknown')
-    const [gender, setGenderFilter] = useState<string>('unknown')
+    const [status, setStatus] = useState<string>('stat')
+    const [gender, setGenderFilter] = useState<string>('gen')
     const dispatch = useDispatch()
 
     const fetchFilteredResult = (name: string) => {
-        // @ts-ignore
-        dispatch(getCharacters({ status, gender, name }))
+        dispatch(
+            // @ts-ignore
+            getCharacters({
+                status: status !== "stat" && status,
+                gender: gender !== "gen" && gender,
+                name
+            })
+        )
     }
 
     const filterByName = useCallback((name: string) => {
+        if (name.length > 2) {
+            debounce(() => {
+                // use when testing the app err handling
+                // fetchFilteredResult(name)
 
+                // @ts-ignore
+                dispatch(getCharacters({ name }))
+            })()
+        }
     }, [])
 
+    // watches changes in select fields
     useEffect(() => {
         fetchFilteredResult(characterName)
     }, [gender, status])
 
-    // watches changes in select fields
     useEffect(() =>
         filterByName(characterName), [characterName, filterByName]
     );
+
+    // NOTE: A check needs to created to ensure filter fields are not used with their default fields e.g unknown.. It'd have been better if the API accepted a default like `all`  
 
     return (
         <SidebarContainer>
@@ -82,7 +76,7 @@ const Sidebar = () => {
             <br />
 
             <SelectContainer defaultValue={status} onChange={e => setStatus(e.target.value)} >
-                <option value="unknown" disabled hidden>
+                <option value="stat" disabled hidden>
                     Status
                 </option>
 
@@ -103,7 +97,7 @@ const Sidebar = () => {
             <br />
 
             <SelectContainer defaultValue={gender} onChange={e => setGenderFilter(e.target.value)} >
-                <option value="unknown" disabled hidden>
+                <option value="gen" disabled hidden>
                     Gender Filter
                 </option>
 

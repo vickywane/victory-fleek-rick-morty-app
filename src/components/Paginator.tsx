@@ -66,8 +66,9 @@ const Paginator = ({ itemSize }: PaginatorProps) => {
                 }}
             >
                 {
-                    Array(itemSize).fill(0).map((_, index) => (
+                    Array(itemSize).fill(0).map((_, index: number) => (
                         <PaginationItem
+                            key={index}
                             style={{
                                 overflow: "hidden",
                                 whiteSpace: "nowrap",

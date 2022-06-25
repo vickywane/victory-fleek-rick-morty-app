@@ -28,3 +28,14 @@ export interface Episode {
     name: string;
     url: string;
 }
+
+export interface KEYBOARD_OPTS {
+    key: string;
+    keyName: string;
+    keyCode: number;
+}
+
+export interface useKeyboardKeyProps {
+    keyMatch: KEYBOARD_OPTS;
+    callback: () => void;
+}

@@ -4,9 +4,9 @@ const BASE_URI: string = "https://rickandmortyapi.com/api"
 
 interface GetCharacterOpts {
 	currentPage?: number;
-	status?: string;
-	name?: string;
-	gender?: string
+	status?: string | boolean;
+	name?: string | boolean;
+	gender?: string | boolean
 }
 
 export const getCharacters = createAsyncThunk(
@@ -15,13 +15,14 @@ export const getCharacters = createAsyncThunk(
 		try {
 			let query = `${BASE_URI}/character/?page=${currentPage}`
 
+			// if (page) query = `${query}&page=${page}`
 			if (status) query = `${query}&status=${status}`
 			if (gender) query = `${query}&gender=${gender}`
 			if (name) query = `${query}&name=${name}`
 
 			const req = await fetch(query)
 
-			if (req) {
+			if (req.status === 200) {
 				const data = await req.json()
 
 				return data
