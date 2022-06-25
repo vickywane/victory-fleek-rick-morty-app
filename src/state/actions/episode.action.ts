@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const BASE_URI: string = "https://rickandmortyapi.com/api"
+import { restEndpoint } from "./apiService";
 
 interface GetCharacterOpts {
 	episodeId?: number
@@ -12,7 +11,7 @@ export const getEpisodeDetails = createAsyncThunk(
 		if (!episodeId) return
 
 		try {
-			const req = await fetch(`${BASE_URI}/episode/${episodeId}`)
+			const req = await fetch(`${restEndpoint()}/episode/${episodeId}`)
 
 			if (req) {
 				const data = await req.json()

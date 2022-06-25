@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { getCharacters } from '../state/actions/character.action'
 import { debounce } from '../utils/debounce'
 import { TextInputContainer } from '../styles'
+import { BACKSPACE_KEY, useKeyboardKey } from '../utils/useKeyboardKey'
 
 const SidebarContainer = styled.div`
     border-right: 1.5px solid #000;
@@ -24,7 +25,7 @@ const Sidebar = () => {
     const [gender, setGenderFilter] = useState<string>('gen')
     const dispatch = useDispatch()
 
-    const fetchFilteredResult = (name: string) => {
+    const fetchFilteredResult = (name?: string) => {
         dispatch(
             // @ts-ignore
             getCharacters({
@@ -55,6 +56,15 @@ const Sidebar = () => {
     useEffect(() =>
         filterByName(characterName), [characterName, filterByName]
     );
+
+    useKeyboardKey({
+        keyMatch: BACKSPACE_KEY,
+        callback: () => {
+            if ( characterName.length <= 1) {
+                fetchFilteredResult()
+            }
+        }
+    })
 
     // NOTE: A check needs to created to ensure filter fields are not used with their default fields e.g unknown.. It'd have been better if the API accepted a default like `all`  
 

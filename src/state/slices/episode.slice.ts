@@ -1,17 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Episode } from '../../types';
+import { Episode, EpisodeStateOpts } from '../../types';
 import {
      getEpisodeDetails
 } from '../actions/episode.action';
 
-interface EpisodeState {
-    loadError: boolean,
-    loading: boolean,
-    episode: Episode
-    currentEpisodeTab: number;
-}
-
-const initialState: EpisodeState = {
+const initialState: EpisodeStateOpts = {
     episode: {} as Episode,
     currentEpisodeTab: 1,
     loadError: false,

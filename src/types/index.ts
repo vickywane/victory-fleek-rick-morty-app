@@ -19,6 +19,21 @@ export interface Character {
     url: string
 }
 
+export interface CharacterStateOpts {
+    characters: Array<Character>,
+    character: Character,
+    loadError: boolean,
+    loading: boolean,
+    resultsInfo: Record<string, number>
+}
+
+export interface EpisodeStateOpts {
+    loadError: boolean,
+    loading: boolean,
+    episode: Episode
+    currentEpisodeTab: number;
+}
+
 export interface Episode {
     air_date: string;
     characters: Array<string>;

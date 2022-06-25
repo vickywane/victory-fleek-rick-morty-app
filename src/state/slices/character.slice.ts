@@ -4,17 +4,9 @@ import {
 	getSingleCharacter,
 	getCharacters,
 } from '../actions/character.action';
-import { Character } from '../../types';
+import { Character, CharacterStateOpts } from '../../types';
 
-interface CharacterState {
-	characters: Array<Character>,
-	character: Character,
-	loadError: boolean,
-	loading: boolean,
-	resultsInfo: Record<string, number>
-}
-
-const initialState: CharacterState = {
+const initialState: CharacterStateOpts = {
 	characters: [],
 	character: {} as Character,
 	loadError: false,
@@ -32,12 +24,24 @@ const characterSlice = createSlice({
 	},
 	extraReducers: (builder) =>  {
 		builder.addCase(getCharacters.fulfilled, (state, action) => {
+			if (!action.payload) {
+				state.loadError = true
+
+				return
+			}
+		
 			state.characters = action.payload.results
 			state.resultsInfo = action.payload.info
 			state.loading = false
 		})
 		
 		builder.addCase(getSingleCharacter.fulfilled, (state, action) => {
+			if (!action.payload) {
+				state.loadError = true
+
+				return
+			}
+
 			state.character = action.payload
 			state.loading = false
 		})

@@ -38,7 +38,7 @@ export const TextInputContainer = styled.form`
     align-items: center;
 
     span {
-        font-size: 16px;
+        font-size: 20px;
         padding-right: 6px; 
     }
 
@@ -48,5 +48,13 @@ export const TextInputContainer = styled.form`
         width: 100%;
         margin-right: 6px;
         font-size: 16px;
+
+        &:focus {
+            outline: 0px;
+       };
+    }
+
+    &:hover {
+        cursor: pointer;
     }
 `

@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-const BASE_URI: string = "https://rickandmortyapi.com/api"
+import { restEndpoint } from "./apiService";
 
 interface GetCharacterOpts {
 	currentPage?: number;
@@ -13,7 +12,7 @@ export const getCharacters = createAsyncThunk(
 	'characters/getCharacters',
 	async ({ currentPage = 1, status, gender, name = "" }: GetCharacterOpts) => {
 		try {
-			let query = `${BASE_URI}/character/?page=${currentPage}`
+			let query = `${restEndpoint()}/character/?page=${currentPage}`
 
 			// if (page) query = `${query}&page=${page}`
 			if (status) query = `${query}&status=${status}`
@@ -38,11 +37,10 @@ export const getSingleCharacter = createAsyncThunk(
 	'characters/getSingleCharacter',
 	async (id: number) => {
 		try {
-			const req = await fetch(`${BASE_URI}/character/${id}`)
+			const req = await fetch(`${restEndpoint()}/character/${id}`)
 
 			if (req) {
 				const data = await req.json()
-				console.log("DATA", data);
 
 				return data
 			}
