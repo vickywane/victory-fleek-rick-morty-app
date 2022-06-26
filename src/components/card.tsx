@@ -33,7 +33,6 @@ const CardContainer = styled.div`
     }
 
     @media ${deviceSize.mobileL} {
-        background: green;
         width: 300px; 
     }
 `

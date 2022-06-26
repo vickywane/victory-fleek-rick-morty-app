@@ -24,8 +24,29 @@ export const useKeyboardKey = ({ callback, keyMatch }: useKeyboardKeyProps) => {
     });
 };
 
+export const useClickHandler = (elementRef: any, callback: Function,) => {
+    React.useEffect(() => {
+        const eventListener = (event: MouseEvent) => {
+            if (!elementRef.current?.contains(event.target)) {
+                callback();
+            }
+        };
+
+        document.addEventListener("click", eventListener);
+        return () => {
+            document.removeEventListener("click", eventListener);
+        };
+    });
+}
+
 export const BACKSPACE_KEY: KEYBOARD_OPTS = {
     key: "Backspace",
     keyName: "Backspace",
     keyCode: 8,
 }
+
+export const ESCAPE_KEY: KEYBOARD_OPTS = {
+    key: "Escape",
+    keyName: "Esc",
+    keyCode: 27,
+};

@@ -4,18 +4,11 @@ import { FiSearch } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
 import { getCharacters } from '../state/actions/character.action'
 import { debounce } from '../utils/debounce'
-import { TextInputContainer } from '../styles'
+import { SelectContainer, TextInputContainer } from '../styles'
 import { BACKSPACE_KEY, useKeyboardKey } from '../utils/useKeyboardKey'
 
 const SidebarContainer = styled.div`
     padding: 10px;
-`
-
-const SelectContainer = styled.select`
-    width: 100%;
-    height: 40px;
-    padding: 6px;
-    border-radius: 6px;
 `
 
 const Sidebar = () => {

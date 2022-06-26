@@ -29,7 +29,7 @@ export const ListItem = styled.li`
 `
 
 export const TextInputContainer = styled.form`
-    height: 40px;
+    height: 45px;
     width: 95%;
     border: 1px solid #000;
     border-radius: 30px;
@@ -58,4 +58,11 @@ export const TextInputContainer = styled.form`
     &:hover {
         cursor: pointer;
     }
+`
+
+export const SelectContainer = styled.select`
+    width: 100%;
+    height: 40px;
+    padding: 6px;
+    border-radius: 6px;
 `
