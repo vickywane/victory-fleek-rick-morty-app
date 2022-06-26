@@ -3,10 +3,10 @@ import BackgroundImage from '../assets/rick-morty.png'
 import ImageContainer from "./Image"
 import { useNavigate } from 'react-router-dom'
 import { Button, Text } from "../styles"
-import breakpoint from "styled-components-breakpoint"
 import { Character } from "../types"
 import { setCharacter } from '../state/slices/character.slice'
 import { useDispatch } from "react-redux"
+import { deviceSize } from "../utils/mediaQueryBreakpoints"
 
 const CardContainer = styled.div`
     height: 300px;
@@ -15,6 +15,7 @@ const CardContainer = styled.div`
     padding: 10px;
     display: flex; 
     flex-direction: column;
+    background: #fff;
     justify-content: space-between;
 
     .details-list {
@@ -23,18 +24,17 @@ const CardContainer = styled.div`
         list-style: none;
     }
 
-    ${breakpoint('mobile')`
-        height: 270px;
-        width: 300px; 
-    `}
-
-    ${breakpoint('tablet')`
-        height: 300px;
-        width: 250px; 
-    `}
-
     a {
         text-decoration: none;
+    }
+
+    &:hover {
+        box-shadow: 0 3px 4px grey;
+    }
+
+    @media ${deviceSize.mobileL} {
+        background: green;
+        width: 300px; 
     }
 `
 
@@ -70,7 +70,6 @@ const Card = ({ character }: CardProps) => {
             <Button
                 onClick={() => handleDetailSelect()}
                 width="100%"
-                color="grey"
             >
                 Details
             </Button>

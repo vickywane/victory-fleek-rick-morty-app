@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FiMenu } from 'react-icons/fi'
-import breakpoint from 'styled-components-breakpoint'
+import { deviceSize } from '../utils/mediaQueryBreakpoints'
 
 const Head = styled.header`
     nav {
@@ -10,11 +10,11 @@ const Head = styled.header`
         border-bottom: 1.5px solid #000;
         text-align: center;
         display: flex;
+        justify-content: center;
 
         .menu-ctn {
-            font-size: 35px;
-            display: flex;
-            place-items: center;
+            
+            display: none;
         }
 
         img {
@@ -24,7 +24,8 @@ const Head = styled.header`
             object-fit: cover;
         }
 
-        ${breakpoint('mobile')`
+
+        @media ${deviceSize.tablet} {
          justify-content: space-between;
 
          img {
@@ -33,26 +34,18 @@ const Head = styled.header`
             margin-top: 10px;
          }
 
-            .menu-ctn {
-                padding-left: 10px;
-                display: flex;
-            } 
-        `}
+        .menu-ctn {
+            padding-left: 10px;
+            display: flex;
+            font-size: 35px;
+            display: flex;
+            place-items: center;
 
-        ${breakpoint('tablet')`
-            justify-content: center;
-
-            img {
-                height: 50px;
-                width: 300px;
-                margin-top: 5px;
+            &:hover {
+                cursor: pointer;
             }
-    
-
-            .menu-ctn {
-                display: none;
-            } 
-        `}
+        } 
+        }
     }
 `
 

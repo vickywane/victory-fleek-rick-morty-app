@@ -30,12 +30,13 @@ export const ListItem = styled.li`
 
 export const TextInputContainer = styled.form`
     height: 40px;
-    width: 300px;
+    width: 95%;
     border: 1px solid #000;
     border-radius: 30px;
     padding: 0 6px;
     display: flex;
     align-items: center;
+    background: #fff;
 
     span {
         font-size: 20px;

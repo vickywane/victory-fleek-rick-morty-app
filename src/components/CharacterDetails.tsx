@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { Character } from "../types"
+import { deviceSize } from "../utils/mediaQueryBreakpoints"
+import { Text } from '../styles/'
 import ImageContainer from "./Image"
 
 const DetailsGrid = styled.div`
@@ -13,6 +15,16 @@ const DetailsGrid = styled.div`
             margin: 1rem 0;
         }
     }
+
+    @media ${deviceSize.tablet} {
+        display: flex;
+        flex-direction: column;
+
+        .details-list {
+            margin: 0;
+            padding: 0;
+        }
+   }
 `
 
 interface CharacterDetailsProps {
@@ -25,28 +37,28 @@ const CharacterDetails = ({ character }: CharacterDetailsProps) => (
 
         <ul className="details-list" >
             <li>
-                {character.id}
+                <Text> {character.id} </Text>
             </li>
             <li>
-                {character.name}
+                <Text> {character.name} </Text>
             </li>
             <li>
-                {character.status}
+                <Text> {character.status} </Text>
             </li>
             <li>
-                {character.species}
+                <Text> {character.species} </Text>
             </li>
             <li>
-                {character.type}
+                <Text> {character.type} </Text>
             </li>
             <li>
-                {character.gender}
+                <Text> {character.gender} </Text>
             </li>
             <li>
-                {character.origin.name}
+                <Text> {character.origin.name} </Text>
             </li>
             <li>
-                {new Date(character.created).toLocaleDateString()}
+                <Text> {new Date(character.created).toLocaleDateString()} </Text>
             </li>
         </ul>
     </DetailsGrid>

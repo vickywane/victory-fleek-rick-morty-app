@@ -8,7 +8,6 @@ import { TextInputContainer } from '../styles'
 import { BACKSPACE_KEY, useKeyboardKey } from '../utils/useKeyboardKey'
 
 const SidebarContainer = styled.div`
-    border-right: 1.5px solid #000;
     padding: 10px;
 `
 

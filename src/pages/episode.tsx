@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../state'
 import { useEffect } from "react"
 import { getSingleCharacter } from "../state/actions/character.action"
+import { deviceSize } from "../utils/mediaQueryBreakpoints"
 
 const GridContainer = styled.div`
     display: grid;
@@ -37,6 +38,16 @@ const GridContainer = styled.div`
         &:hover {
             cursor: pointer;
         }
+    }
+
+    @media ${deviceSize.tablet} {
+         display: flex;
+         flex-direction: column;
+         margin-top: 5px;
+
+         .navigation-ctn {
+            justify-content: flex-start;
+         }
     }
 `
 

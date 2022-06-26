@@ -1,6 +1,6 @@
 # Fleek Front-End Assignment
 
-Within this codebase, I built the solution to the Fleek assignment on building a web app for listing characters from the Rick and Morty TV Show via the (REST Rick and Morty API)[https://rickandmortyapi.com/documentation].
+Within this codebase, I built the solution to the Fleek assignment on building a web app for listing characters from the Rick and Morty TV Show via the [REST Rick and Morty API](https://rickandmortyapi.com/documentation)
 
 ## Development Notes: 
 
