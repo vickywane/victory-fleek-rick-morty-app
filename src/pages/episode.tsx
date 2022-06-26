@@ -18,6 +18,8 @@ const GridContainer = styled.div`
     grid-gap: 0 2rem;
     padding: 10px;
     margin-top: 30px;
+    max-width: 1500px;
+    margin: 0 auto;
     
     .navigation-ctn {
         display: flex;
@@ -33,10 +35,6 @@ const GridContainer = styled.div`
             font-size: 22px;
             padding-top: 2px;
             margin : 0;
-        }
-
-        &:hover {
-            cursor: pointer;
         }
     }
 
@@ -70,12 +68,16 @@ export default function Episode() {
             <Header />
 
             {character.name && <GridContainer>
-                <Link to="/" className='navigation-ctn'>
-                    <span>
-                        <FiChevronLeft />
-                    </span>
-                    <p> Back </p>
-                </Link>
+                <div >
+                    <Link to="/" >
+                        <div className='navigation-ctn'>
+                            <span>
+                                <FiChevronLeft />
+                            </span>
+                            <p> Back </p>
+                        </div>
+                    </Link>
+                </div>
 
                 <div>
                     <section>

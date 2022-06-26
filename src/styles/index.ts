@@ -22,6 +22,9 @@ export const UlList = styled.ul`
     list-style: none;
     display: flex;
     flex-direction: ${(props: { flexDirection: string }) => props.flexDirection};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `
 
 export const ListItem = styled.li`

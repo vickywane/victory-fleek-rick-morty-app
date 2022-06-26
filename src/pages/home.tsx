@@ -10,6 +10,7 @@ import { getCharacters } from '../state/actions/character.action'
 import { Text } from '../styles/index'
 import { Character } from '../types'
 import { deviceSize } from '../utils/mediaQueryBreakpoints'
+import FAB from '../components/fab'
 
 
 const GridContainer = styled.div`
@@ -69,6 +70,8 @@ const Home = () => {
         <div>
             <Header />
 
+                <FAB />
+
             <div
                 style={{
                     background: "#f9f9f9"
@@ -85,7 +88,7 @@ const Home = () => {
                                 <Text > One sec, getting your data! </Text>
                                 :
                                 <div>
-                                    <div className="grid-items">
+                                    <div id="characters" className="grid-items">
                                         {
                                             characters.map((character: Character, index: number) => (
                                                 <Card
@@ -96,7 +99,14 @@ const Home = () => {
                                         }
                                     </div>
 
-                                    {/* <Paginator itemSize={resultsInfo.pages} /> */}
+                                    {/* <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'flex-end'
+                                        }}
+                                    > */}
+                                    <Paginator itemSize={resultsInfo.pages} />
+                                    {/* </div> */}
                                 </div>
                         }
                     </div>

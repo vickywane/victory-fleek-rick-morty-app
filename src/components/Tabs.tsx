@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { RootState } from "../state"
 import { getEpisodeDetails } from "../state/actions/episode.action"
 import { setCurrentEpisode } from '../state/slices/episode.slice'
+import { deviceSize } from "../utils/mediaQueryBreakpoints"
 
 const Tabs = styled.ul`
     display: flex;
@@ -30,6 +31,10 @@ const Tab = styled.li`
         cursor: pointer;
         background : grey;
     }
+
+    @media ${deviceSize.mobileL} {
+        font-size: 13px;
+    }
 `
 
 interface EpisodeTabsProps {
@@ -40,7 +45,7 @@ const EpisodeTabs = ({ episodes }: EpisodeTabsProps) => {
     const dispatch = useDispatch()
     const { currentEpisodeTab } = useSelector((state: RootState) => state.episodes)
 
- 
+
     const handleTabChange = (index: number) => {
         dispatch(setCurrentEpisode(index))
 
@@ -50,19 +55,16 @@ const EpisodeTabs = ({ episodes }: EpisodeTabsProps) => {
 
     return (
         <Tabs>
-            {episodes?.slice(0, 5).map((item, index: number) => {
-                
-                // console.log(item, index + 1);
-                
-
+            {episodes?.slice(0, 5).map((_, index: number) => {
                 return (
-                <Tab
-                    onClick={() => handleTabChange(index + 1) }
-                    active={currentEpisodeTab === index + 1}
-                >
-                    Episode {index + 1}
-                </Tab>
-            )})}
+                    <Tab
+                        onClick={() => handleTabChange(index + 1)}
+                        active={currentEpisodeTab === index + 1}
+                    >
+                        Episode {index + 1}
+                    </Tab>
+                )
+            })}
         </Tabs>
     )
 }
