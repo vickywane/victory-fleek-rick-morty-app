@@ -49,4 +49,5 @@ const characterSlice = createSlice({
 });
 
 export const { setCharacter } = characterSlice.actions
+export const characterReducer = characterSlice.reducer
 export default characterSlice;

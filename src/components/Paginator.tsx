@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FiChevronsRight, FiChevronsLeft } from 'react-icons/fi'
-import { useEffect, useLayoutEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { UlList } from "../styles"
 import { useDispatch } from "react-redux"
 import { getCharacters } from "../state/actions/character.action"

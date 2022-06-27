@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit";
 import characterSlice from "./slices/character.slice";
 import episodeSlice from "./slices/episode.slice";
 
@@ -7,13 +7,16 @@ const reducer = combineReducers({
     episodes: episodeSlice.reducer
 })
 
-const store = configureStore({
-    reducer
+const setupStore : any = (preloadedState?: PreloadedState<RootState>) =>  configureStore({
+    reducer,
+    preloadedState
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof reducer>
 
-export default store
+export type AppStore = ReturnType<typeof setupStore>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = AppStore['dispatch']
+
+export default setupStore

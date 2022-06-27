@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { Character } from "../types"
 import { deviceSize } from "../utils/mediaQueryBreakpoints"
 import { Text } from '../styles/'
-import ImageContainer from "./Image"
 
 const DetailsGrid = styled.div`
     display: grid;

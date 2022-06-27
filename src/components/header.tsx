@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { FiMenu } from 'react-icons/fi'
 import { deviceSize } from '../utils/mediaQueryBreakpoints'
 import { Link } from 'react-router-dom'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import SidebarSm from './SidebarSm'
 
 const Head = styled.header`
@@ -60,22 +60,24 @@ const Header = ({ showMenu }: HeaderProp) => {
     return (
         <Head>
             <nav>
-
                 <div className="menu-ctn" >
                     {
                         showMenu && (
-                            <FiMenu onClick={() => setSidebarState(!isSidebarOpen)} />
+                            <div role="menu-icon" >
+                                <FiMenu role="menu-icon" onClick={() => setSidebarState(!isSidebarOpen)} />
+                            </div>
                         )
                     }
                 </div>
 
-
-                <Link to="/" >
-                    <img alt="Rick and Morty" src={require("../assets/rick-morty.png")} />
-                </Link>
+                <div role="navigation-item">
+                    <Link to="/" >
+                        <img role="rickLogo" alt="Rick and Morty" src={require("../assets/rick-morty.png")} />
+                    </Link>
+                </div>
 
                 {/* visually hidden element */}
-                <p style={{ color: '#fff' }} > . </p>
+                <p role="navigation-item" style={{ color: '#fff' }} > . </p>
             </nav>
 
             {

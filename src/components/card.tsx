@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import BackgroundImage from '../assets/rick-morty.png'
 import ImageContainer from "./Image"
 import { useNavigate } from 'react-router-dom'
 import { Button, Text } from "../styles"
@@ -51,17 +50,17 @@ const Card = ({ character }: CardProps) => {
     }
 
     return (
-        <CardContainer>
+        <CardContainer role="card">
             <ImageContainer name={character.name} url={character.image} />
 
             <ul className="details-list" >
-                <li>
+                <li role="detail" >
                     <Text> {character.name} </Text>
                 </li>
-                <li>
+                <li role="detail" >
                     <Text> {character.species} </Text>
                 </li>
-                <li>
+                <li role="detail" >
                     <Text> {character.status} </Text>
                 </li>
             </ul>
