@@ -17,6 +17,7 @@ const FABContainer = styled.div`
     bottom: 0;
     right: 0;
     margin-right: 20px;
+    margin-bottom: 10px;
 
     @media ${deviceSize.tablet} {
          display: flex;

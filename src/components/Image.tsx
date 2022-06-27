@@ -21,7 +21,7 @@ const Image = styled.div`
 `
 
 const ImageContainer = ({ name, url, height, width }: ImageProps) => (
-    <Image height={height} >
+    <Image className="img-container" height={height} >
         <img alt={name} src={url} />
     </Image>
 )

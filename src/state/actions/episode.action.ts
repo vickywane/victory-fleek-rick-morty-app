@@ -13,7 +13,7 @@ export const getEpisodeDetails = createAsyncThunk(
 		try {
 			const req = await fetch(`${restEndpoint()}/episode/${episodeId}`)
 
-			if (req) {
+			if (req.status === 200) {
 				const data = await req.json()
 				
 				return data

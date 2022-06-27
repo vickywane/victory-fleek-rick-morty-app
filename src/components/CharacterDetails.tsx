@@ -6,14 +6,21 @@ import ImageContainer from "./Image"
 
 const DetailsGrid = styled.div`
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: auto 1fr;
 
     .details-list {
         list-style: none;
-
         li {
             margin: 1rem 0;
         }
+    }
+
+    .img-container {}
+
+    img {
+        height: 350px;
+        width: 350px;
+        object-fit: contain;
     }
 
     @media ${deviceSize.tablet} {
@@ -24,6 +31,17 @@ const DetailsGrid = styled.div`
             margin: 0;
             padding: 0;
         }
+
+        .img-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        img {
+            height: 170px;
+            width: 200px;
+            object-fit: contain;
+        }
    }
 `
 
@@ -33,7 +51,9 @@ interface CharacterDetailsProps {
 
 const CharacterDetails = ({ character }: CharacterDetailsProps) => (
     <DetailsGrid>
-        <ImageContainer height='300px' name="Episode cover" url={character.image} />
+        <div className="img-container">
+          <img alt={`${character.name} cover`} src={character.image} />
+        </div>
 
         <ul className="details-list" >
             <li>

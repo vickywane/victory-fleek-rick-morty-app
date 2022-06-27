@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 import { FiX } from 'react-icons/fi'
 import { deviceSize } from '../utils/mediaQueryBreakpoints'
-import { useEffect, useRef, useState } from 'react'
 import Sidebar from './sidebar'
-import { ESCAPE_KEY, useClickHandler, useKeyboardKey } from '../utils/useKeyboardKey'
+import { ESCAPE_KEY, useKeyboardKey } from '../utils/useKeyboardKey'
 
 const SidebarContainer = styled.div`
     display: none;
@@ -14,11 +13,12 @@ const SidebarContainer = styled.div`
 
     .container {
         position: absolute;
+        z-index: 1;
         width: 100%;
         display: grid;
         grid-template-columns: 85% 15%;
         transition: all 300ms;
-        height: calc(100vh - 85px);
+        height: calc(100vh - 60px);
         left: 0;
     }
 

@@ -42,6 +42,10 @@ const GridContainer = styled.div`
         grid-gap: 1rem 1rem;
     }
 
+    .fab-ctn {
+        position: relative;
+    }
+
     @media ${deviceSize.tablet} {
         grid-template-columns: 1fr;
 
@@ -70,8 +74,6 @@ const Home = () => {
         <div>
             <Header />
 
-                <FAB />
-
             <div
                 style={{
                     background: "#f9f9f9"
@@ -85,7 +87,7 @@ const Home = () => {
                     <div className='grid-container' >
                         {
                             loadingCharacters ?
-                                <Text > One sec, getting your data! </Text>
+                                <Text > One second, grabbing all Rick 'n' Mortys! </Text>
                                 :
                                 <div>
                                     <div id="characters" className="grid-items">
@@ -99,14 +101,11 @@ const Home = () => {
                                         }
                                     </div>
 
-                                    {/* <div
-                                        style={{ 
-                                            display: 'flex',
-                                            justifyContent: 'flex-end'
-                                        }}
-                                    > */}
+                                    <div className="fab-ctn">
+                                        <FAB />
+                                    </div>
+
                                     <Paginator itemSize={resultsInfo.pages} />
-                                    {/* </div> */}
                                 </div>
                         }
                     </div>

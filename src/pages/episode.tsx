@@ -14,12 +14,14 @@ import { deviceSize } from "../utils/mediaQueryBreakpoints"
 const GridContainer = styled.div`
     display: grid;
     grid-template-columns: 100px 1fr;
-    height: calc(100vh - 100px);
     grid-gap: 0 2rem;
     padding: 10px;
     margin-top: 30px;
     max-width: 1500px;
     margin: 0 auto;
+
+    height: calc(100vh - 90px);
+    overflow: scroll;
     
     .navigation-ctn {
         display: flex;
@@ -67,36 +69,34 @@ export default function Episode() {
         <div>
             <Header />
 
-            {character.name && <GridContainer>
-                <div >
-                    <Link to="/" >
-                        <div className='navigation-ctn'>
-                            <span>
-                                <FiChevronLeft />
-                            </span>
-                            <p> Back </p>
-                        </div>
-                    </Link>
-                </div>
+            {character.name &&
+                <GridContainer>
+                    <div >
+                        <Link to="/" >
+                            <div className='navigation-ctn'>
+                                <span>
+                                    <FiChevronLeft />
+                                </span>
+                                <p> Back </p>
+                            </div>
+                        </Link>
+                    </div>
+ 
+                    <div className="details" >
+                        <section>
+                            <CharacterDetails character={character} />
+                        </section>
+                        
+                        <section>
+                            <h3> Episodes Info </h3>
 
-                <div>
-                    <section>
-                        <CharacterDetails character={character} />
-                    </section>
-                    <br />
-                    <br />
-                    <br />
-                    <section>
-                        <h3> Episodes Info </h3>
+                            <Tabs episodes={character.episode} />
 
-                        <Tabs episodes={character.episode} />
-                    </section>
-
-                    <section>
-                        <EpisodeDetails characterName={character.name} />
-                    </section>
-                </div>
-            </GridContainer>}
+                            <EpisodeDetails characterName={character.name} />
+                        </section>
+                    </div>
+                </GridContainer>
+            }
         </div>
     )
 }

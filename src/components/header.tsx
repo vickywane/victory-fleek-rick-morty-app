@@ -3,7 +3,6 @@ import { FiMenu, FiX } from 'react-icons/fi'
 import { deviceSize } from '../utils/mediaQueryBreakpoints'
 import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
-import { ESCAPE_KEY, useClickHandler, useKeyboardKey } from '../utils/useKeyboardKey'
 import SidebarSm from './SidebarSm'
 
 const Head = styled.header`
