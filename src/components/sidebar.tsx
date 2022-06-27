@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import  { useCallback, useEffect, useState } from 'react'
 import styled from "styled-components"
 import { FiSearch } from 'react-icons/fi'
 import { useDispatch } from 'react-redux'
@@ -58,8 +58,6 @@ const Sidebar = ({ closeSidebar }: SidebarProps) => {
             }
         }
     })
-
-    // NOTE: A check needs to created to ensure filter fields are not used with their default fields e.g unknown.. It'd have been better if the API accepted a default like `all`  
 
     return (
         <SidebarContainer>
