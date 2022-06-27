@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { RootState } from "../state"
@@ -44,13 +45,14 @@ const EpisodeTabs = ({ episodes }: EpisodeTabsProps) => {
     const dispatch = useDispatch()
     const { currentEpisodeTab } = useSelector((state: RootState) => state.episodes)
 
-
     const handleTabChange = (index: number) => {
         dispatch(setCurrentEpisode(index))
+    }
 
+    useEffect(() => {
         // @ts-ignore
         dispatch(getEpisodeDetails({ episodeId: currentEpisodeTab }))
-    }
+    }, [currentEpisodeTab])
 
     return (
         <Tabs>

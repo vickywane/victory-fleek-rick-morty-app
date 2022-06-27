@@ -1,9 +1,7 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import styled from "styled-components"
 import { RootState } from "../state"
 import { Text } from '../styles/'
-import { getEpisodeDetails } from "../state/actions/episode.action"
 
 const Details = styled.div`
     list-style: none;
@@ -13,19 +11,8 @@ const Details = styled.div`
     }
 `
 
-interface EpisodeDetailsProps {
-    characterName: string;
-}
-
-const EpisodeDetails = ({ characterName }: EpisodeDetailsProps) => {
-    const dispatch = useDispatch()
+const EpisodeDetails = () => {
     const { episode } = useSelector((state: RootState) => state.episodes)
-
-    useEffect(() => {
-
-        // @ts-ignore
-        dispatch(getEpisodeDetails({ character: characterName }))
-    }, [])
 
     return (
         <Details  >

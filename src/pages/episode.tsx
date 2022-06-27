@@ -92,7 +92,7 @@ export default function Episode() {
 
                             <Tabs episodes={character.episode} />
 
-                            <EpisodeDetails characterName={character.name} />
+                            <EpisodeDetails />
                         </section>
                     </div>
                 </GridContainer>
