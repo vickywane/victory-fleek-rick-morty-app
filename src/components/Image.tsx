@@ -15,8 +15,8 @@ const Image = styled.div`
 
     img {
         height: ${(props: { height?: string }) => props.height ? props.height : "130px" };
-        object-fit: cover;
         width: 100%;
+        object-fit: fill;
     }
 `
 
