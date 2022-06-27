@@ -5,7 +5,6 @@ import { UlList } from "../styles"
 import { useDispatch } from "react-redux"
 import { getCharacters } from "../state/actions/character.action"
 import { createPaginationRange } from "../utils/paginationRange"
-import { useMediaQuery } from 'react-responsive'
 import { deviceSize } from "../utils/mediaQueryBreakpoints"
 import { usePageMatch } from "../utils/usePageMatch"
 
