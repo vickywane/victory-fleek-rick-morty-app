@@ -5,7 +5,8 @@ import { UlList } from "../styles"
 import { useDispatch } from "react-redux"
 import { getCharacters } from "../state/actions/character.action"
 import { createPaginationRange } from "../utils/paginationRange"
-
+import { useMediaQuery } from 'react-responsive'
+import { deviceSize } from "../utils/mediaQueryBreakpoints"
 
 const Paginate = styled.div`
     display: flex;
@@ -48,9 +49,11 @@ interface PaginatorProps {
 }
 
 const Paginator = ({ itemSize }: PaginatorProps) => {
+    const isMobile = useMediaQuery({ query: deviceSize.tablet })
+
     const [currentPage, setPage] = useState<number>(1)
     const dispatch = useDispatch()
-    const [paginators, setPaginators] = useState([0, 9])
+    const [paginators, setPaginators] = useState([0, isMobile ? 3 : 9])
     const [paginationRange, setPaginationRange] = useState<Array<number>>(createPaginationRange(paginators[0], paginators[1]))
 
 
@@ -69,17 +72,17 @@ const Paginator = ({ itemSize }: PaginatorProps) => {
         if (
             currentPage === (paginationRange[0] + 1)
         ) {
-            console.log("FIRST ITEM IN ARRAY");
+            // console.log("FIRST ITEM IN ARRAY");
 
             setPaginators(state => {
 
-                console.log(paginators);
+                // console.log(paginators);
 
 
                 return [
-                    state[0] === 0 ? 0 : state[0] - 9,
+                    state[0] === 0 ? 0 : state[0] - (isMobile ? 3 : 9),
 
-                    state[1] === 9 ? 9 : state[1] - 9,
+                    state[1] === (isMobile ? 3 : 9) ? isMobile ? 3 : 9 : state[1] - 9,
 
                     // state[1] - 9
                 ]
@@ -87,10 +90,10 @@ const Paginator = ({ itemSize }: PaginatorProps) => {
         }
 
         if (currentPage === (paginationRange[paginationRange.length - 1] + 1)) {
-            setPaginators(state => [state[0] + 9, state[1] + 9])
+            setPaginators(state => [state[0] + (isMobile ? 3 : 9), state[1] + (isMobile ? 3 : 9)])
         }
 
-    }, [currentPage])
+    }, [currentPage, isMobile])
 
     useEffect(() => {
         setPaginationRange(createPaginationRange(paginators[0], paginators[1]))
