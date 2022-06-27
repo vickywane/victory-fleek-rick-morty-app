@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { RootState } from "../state"
@@ -58,6 +57,7 @@ const EpisodeTabs = ({ episodes }: EpisodeTabsProps) => {
             {episodes?.slice(0, 5).map((_, index: number) => {
                 return (
                     <Tab
+                        key={index}
                         onClick={() => handleTabChange(index + 1)}
                         active={currentEpisodeTab === index + 1}
                     >

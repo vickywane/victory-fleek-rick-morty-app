@@ -67,7 +67,7 @@ export default function Episode() {
 
     return (
         <div>
-            <Header />
+            <Header showMenu={false} />
 
             {character.name &&
                 <GridContainer>

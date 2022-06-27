@@ -56,7 +56,7 @@ const SidebarSm = ({ closeSidebar }: SidebarSmProps) => {
         <SidebarContainer>
             <div className="container">
                 <div className="sidebar-ctn" >
-                    <Sidebar />
+                    <Sidebar closeSidebar={() => closeSidebar()} />
                 </div>
 
                 <div className="right-icon-ctn" >

@@ -50,15 +50,25 @@ const Head = styled.header`
     }
 `
 
-const Header = () => {
+interface HeaderProp {
+    showMenu: boolean;
+}
+
+const Header = ({ showMenu }: HeaderProp) => {
     const [isSidebarOpen, setSidebarState] = useState<boolean>(false)
 
     return (
         <Head>
             <nav>
+
                 <div className="menu-ctn" >
-                    <FiMenu onClick={() => setSidebarState(!isSidebarOpen)} />
+                    {
+                        showMenu && (
+                            <FiMenu onClick={() => setSidebarState(!isSidebarOpen)} />
+                        )
+                    }
                 </div>
+
 
                 <Link to="/" >
                     <img alt="Rick and Morty" src={require("../assets/rick-morty.png")} />

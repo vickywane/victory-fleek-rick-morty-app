@@ -72,7 +72,7 @@ const Home = () => {
 
     return (
         <div>
-            <Header />
+            <Header showMenu />
 
             <div
                 style={{

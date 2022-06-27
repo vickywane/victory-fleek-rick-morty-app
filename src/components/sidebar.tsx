@@ -11,7 +11,11 @@ const SidebarContainer = styled.div`
     padding: 10px;
 `
 
-const Sidebar = () => {
+interface SidebarProps {
+    closeSidebar?: Function
+}
+
+const Sidebar = ({ closeSidebar }: SidebarProps) => {
     const [characterName, setCharacterName] = useState<string>('')
     const [status, setStatus] = useState<string>('stat')
     const [gender, setGenderFilter] = useState<string>('gen')
@@ -31,9 +35,6 @@ const Sidebar = () => {
     const filterByName = useCallback((name: string) => {
         if (name.length > 2) {
             debounce(() => {
-                // use when testing the app err handling
-                // fetchFilteredResult(name)
-
                 // @ts-ignore
                 dispatch(getCharacters({ name }))
             })()
@@ -52,7 +53,7 @@ const Sidebar = () => {
     useKeyboardKey({
         keyMatch: BACKSPACE_KEY,
         callback: () => {
-            if ( characterName.length <= 1) {
+            if (characterName.length <= 1) {
                 fetchFilteredResult()
             }
         }
@@ -77,7 +78,13 @@ const Sidebar = () => {
 
             <br />
 
-            <SelectContainer defaultValue={status} onChange={e => setStatus(e.target.value)} >
+            <SelectContainer defaultValue={status} onChange={e => {
+                setStatus(e.target.value)
+
+                debounce(() => {
+                    if (closeSidebar) closeSidebar()
+                }, 500)()
+            }} >
                 <option value="stat" disabled hidden>
                     Status
                 </option>
@@ -98,7 +105,13 @@ const Sidebar = () => {
             <br />
             <br />
 
-            <SelectContainer defaultValue={gender} onChange={e => setGenderFilter(e.target.value)} >
+            <SelectContainer defaultValue={gender} onChange={e => {
+                setGenderFilter(e.target.value)
+
+                debounce(() => {
+                    if (closeSidebar) closeSidebar()
+                }, 500)()
+            }} >
                 <option value="gen" disabled hidden>
                     Gender Filter
                 </option>
