@@ -26,3 +26,13 @@ While not instructed to, I handled the following edge cases;
 - View the application running on your local host via your browser at `http://localhost:3000`
 
 **Note:** The Rick and Morty public API endpoint is already listed in the `.env` file for an easy setup. I take note that environment variables should be included in the `.gitignore` file.
+
+### Testing: 
+This component has a few E2E test suites setup using React-testing-library. 
+Although I did not have much time left cover the entire application with test suites, I was able to create a test suite for the `Header` and `Card` components each. 
+
+Execute the command below to run the test suites;
+
+```bash
+    npm run test
+```
