@@ -27,7 +27,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
     "lint": "eslint --cache --fix --ext .js,.jsx,ts,tsx, .",
     "cleanup": "lint-staged",
     "pre-commit": "lint-staged"
@@ -53,11 +52,6 @@
   "devDependencies": {
     "@types/": "reach/router",
     "@types/styled-components": "^5.1.25"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --allow-empty"
-    }
   },
   "lint-staged": {
     "*.{ts,tsx}": [
